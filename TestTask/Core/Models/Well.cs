@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-
-namespace Core.Models
+﻿namespace Core.Models
 {
     public class Well
     {
@@ -13,6 +6,6 @@ namespace Core.Models
         public double X { get; set; }
         public double Y { get; set; }
 
-        public List<Intervals> Intervals { get; set; } = new();
+        public List<Interval> Intervals { get; set; } = new();
     }
 }
