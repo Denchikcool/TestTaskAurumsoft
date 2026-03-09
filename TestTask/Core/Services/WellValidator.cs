@@ -20,6 +20,7 @@ namespace Core.Services
                     {
                         errors.Add(new ValidationError
                         {
+                            RowNumber = current.RowNumber,
                             WellId = well.WellId,
                             ErrorMessage = "DepthFrom должно быть строго меньше DepthTo"
                         });
@@ -29,6 +30,7 @@ namespace Core.Services
                     {
                         errors.Add(new ValidationError
                         {
+                            RowNumber = current.RowNumber,
                             WellId = well.WellId,
                             ErrorMessage = "DepthFrom должен быть неотрицательным"
                         });
@@ -38,6 +40,7 @@ namespace Core.Services
                     {
                         errors.Add(new ValidationError
                         {
+                            RowNumber = current.RowNumber,
                             WellId = well.WellId,
                             ErrorMessage = "Porosity должно находиться в диапазоне [0..1]"
                         });
@@ -47,6 +50,7 @@ namespace Core.Services
                     {
                         errors.Add(new ValidationError
                         {
+                            RowNumber = current.RowNumber,
                             WellId = well.WellId,
                             ErrorMessage = "Rock не должен быть пустым"
                         });
@@ -60,6 +64,7 @@ namespace Core.Services
                         {
                             errors.Add(new ValidationError
                             {
+                                RowNumber = current.RowNumber,
                                 WellId = well.WellId,
                                 ErrorMessage = "Интервалы по одной скважине не должны пересекаться"
                             });
