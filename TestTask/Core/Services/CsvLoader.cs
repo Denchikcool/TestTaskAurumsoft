@@ -25,6 +25,7 @@ namespace Core.Services
                     errors.Add(new ValidationError
                     {
                         RowNumber = row,
+                        WellId = parts.Length > 0 ? parts[0] : "",
                         ErrorMessage = "Неверное количество колонок"
                     });
                     continue;
@@ -41,7 +42,8 @@ namespace Core.Services
                         DepthFrom = double.Parse(parts[3], CultureInfo.InvariantCulture),
                         DepthTo = double.Parse(parts[4], CultureInfo.InvariantCulture),
                         Rock = parts[5],
-                        Porosity = double.Parse(parts[6], CultureInfo.InvariantCulture)
+                        Porosity = double.Parse(parts[6], CultureInfo.InvariantCulture),
+                        RowNumber = row,
                     };
 
                     if (!wells.ContainsKey(wellid))
@@ -56,12 +58,13 @@ namespace Core.Services
 
                     wells[wellid].Intervals.Add(interval);
                 }
-                catch
+                catch (Exception ex)
                 {
                     errors.Add(new ValidationError
                     {
                         RowNumber = row,
-                        ErrorMessage = "Ошибка парсинга данных"
+                        WellId = parts.Length > 0 ? parts[0] : "",
+                        ErrorMessage = $"Ошибка парсинга данных ({ex.Message})"
                     });
                 }
             }
