@@ -6,15 +6,15 @@ namespace Core.Services
     {
         public List<ValidationError> Validate(List<Well> wells)
         {
-            var errors = new List<ValidationError>();
+            List<ValidationError> errors = new List<ValidationError>();
 
-            foreach(var well in wells)
+            foreach(Well well in wells)
             {
-                var intervals = well.Intervals.OrderBy(i => i.DepthFrom).ToList();
+                List<Interval> intervals = well.Intervals.OrderBy(i => i.DepthFrom).ToList();
 
                 for (int i = 0; i < intervals.Count; i++)
                 {
-                    var current = intervals[i];
+                    Interval current = intervals[i];
 
                     if(current.DepthFrom >= current.DepthTo)
                     {
@@ -54,7 +54,7 @@ namespace Core.Services
 
                     if (i > 0)
                     {
-                        var prev = intervals[i - 1];
+                        Interval prev = intervals[i - 1];
 
                         if(current.DepthFrom < prev.DepthTo)
                         {
