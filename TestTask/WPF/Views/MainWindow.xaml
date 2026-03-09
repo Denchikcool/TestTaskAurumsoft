@@ -1,0 +1,47 @@
+﻿<Window x:Class="WPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WPF.ViewModels"
+        mc:Ignorable="d"
+        Title="Анализ скважин" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#5F5F5F">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="180"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="White" Padding="10" CornerRadius="6" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Загрузить CSV" Width="150" Height="35" Margin="0,0,10,0" FontWeight="SemiBold" Command="{Binding LoadCsvCommand}"/>
+                <Button Content="Экспортировать в JSON" Width="150" Height="35" FontWeight="SemiBold" Command="{Binding ExportJsonCommand}"/>
+            </StackPanel>
+        </Border>
+        <GroupBox Grid.Row="1" Background="White" Padding="10" Margin="0,10,0,10">
+            <GroupBox.Header>
+                <TextBlock Text="Скважины" Margin="0,20,0,0" FontWeight="Bold" FontSize="14"/>
+            </GroupBox.Header>
+            <DataGrid ItemsSource="{Binding Wells}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Well ID" Binding="{Binding WellId}" Width="*"/>
+                    <DataGridTextColumn Header="Intervals" Binding="{Binding IntervalCount}" Width="*"/>
+                    <DataGridTextColumn Header="Total Depth" Binding="{Binding TotalDepth, StringFormat=F2}" Width="*"/>
+                    <DataGridTextColumn Header="Avg Porosity" Binding="{Binding AvgPorosity, StringFormat=F2}" Width="*"/>
+                    <DataGridTextColumn Header="Dominant Rock" Binding="{Binding DominantRock}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Background="White" Padding="10" Margin="0,10,0,0">
+            <GroupBox.Header>
+                <TextBlock Text="Ошибки" Margin="0,20,0,0" FontWeight="Bold" FontSize="14"/>
+            </GroupBox.Header>
+            <ListBox ItemsSource="{Binding Errors}" BorderThickness="0" FontFamily="Consolas"/>
+        </GroupBox>
+    </Grid>
+</Window>
